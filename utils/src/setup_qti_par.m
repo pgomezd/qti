@@ -71,8 +71,14 @@ switch par.recon.method
         if ~isfield(par.recon,'admm_lambda'); par.recon.admm_lambda = 0.04; end; % ADMM lambda for regularization term
         if ~isfield(par.recon,'lsqr_max_iter'); par.recon.lsqr_max_iter = 10; end; % LSQR iters
         if ~isfield(par.recon,'lsqr_tol'); par.recon.lsqr_tol = 1e-4; end; % LSQR tol
+        
+    case 'STVNNR'
+       if ~isfield(par.recon.STVNNR,'lambda1'); par.recon.STVNNR.lambda1 = 5*10^(-4); end;
+       if ~isfield(par.recon.STVNNR,'lambda2'); par.recon.STVNNR.lambda2 = 5*10^(-3); end;
+       if ~isfield(par.recon.STVNNR,'L'); par.recon.STVNNR.L= 1/L; end;
+       if ~isfield(par.recon.STVNNR,'IterNo'); par.recon.STVNNR.IterNo = 400; end;
     otherwise
-        error('Unknown par.recon.method. Options: NN, TM, IPA, ADMM')
+        error('Unknown par.recon.method. Options: NN, TM, IPA, ADMM, STVNNR')
 end
 
 switch par.recon.sp_method

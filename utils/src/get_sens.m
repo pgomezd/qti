@@ -64,7 +64,7 @@ switch par.recon.psd
 end
 
 %% out
-if par.f.apply_tempsubspace && ~(strcmp(par.recon.method,'ADMM') || strcmp(par.recon.method,'IPA'))
+if par.f.apply_tempsubspace && ~(strcmp(par.recon.method,'ADMM') || strcmp(par.recon.method,'IPA') || strcmp(par.recon.method,'STVNNR'))
     out.X = temporal_forward(out.X,par.V(:,1:par.ind.temp_coeff)); %project back to full temp space for dictionary matching
 end
 out.Y = data.Y; %output raw k-space as well (with no temporal projection or density compensation)

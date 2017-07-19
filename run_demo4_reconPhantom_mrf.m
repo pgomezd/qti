@@ -19,18 +19,25 @@ par.f.match = true; %match to dictionary
 par.ind.mtx_reco = 256; %matrix size
 par.f.use_parallel = true; 
 par.fp.blockSize = floor(256*256/10);
-par.recon.scale_K = 256/225; %ksp scaling (artifical zoom in/out)
+par.recon.scale_K = 256/25                 ; %ksp scaling (artifical zoom in/out)
 par.recon.sp_method = 'nufft'; 
 par.f.scaleK = true; %scales k by 1/maximum
 par.recon.lsqr_max_iter = 10;
-par.recon.admm_max_iter = 200;
+par.recon.admm_max_iter = 250;
 par.recon.lsqr_tol = 1e-4;
 par.recon.llr_block_dim = 8;
-par.recon.admm_lambda = 0.001;
+par.recon.admm_lambda = 0.00005;
 par.recon.admm_rho = 0.9; 
 par.ind.temp_coeff = 8;
-par.recon.method = 'NN';
-par.f.apply_tempsubspace = false; %compresses data by applying temp subspace
+par.recon.method = 'STVNNR';
+par.f.apply_tempsubspace = true; %compresses data by applying temp subspace
+
+% parameters for STVNNR
+par.recon.STVNNR.lambda1 = 9*10^(-4); % parameter for TV term
+par.recon.STVNNR.lambda2 = 7*10^(-3); % parameter for low-rank term
+par.recon.STVNNR.L = 1/82;   % Step size parameter, should be close to zero. 1/acc_factor is a good choice.
+par.recon.STVNNR.IterNo = 1000;  % Maximum number of iterations for the algorithm 
+
 
 %% Get files
 dict =  (['data' filesep 'dict.mat']);

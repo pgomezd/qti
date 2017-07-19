@@ -153,6 +153,8 @@ switch par.recon.method
     case 'IPA'
     case 'ADMM'
         out = admm_recon(data,par);
+    case 'STVNNR'
+        out = stvnnr_recon(data,par);
 end
 
 end
